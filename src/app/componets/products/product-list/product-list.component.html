@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let product of (filteredList$ | async)?.list">
+    <div>
+      {{product.name}}  --- {{product.market.name}}
+    </div>
+  </li>
+</ul>
