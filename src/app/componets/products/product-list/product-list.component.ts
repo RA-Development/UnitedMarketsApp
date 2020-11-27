@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
     itemsPerPage: 0,
     searchField: '',
     searchValue: '',
-    marketId: -1
+    marketId: 1
   };
 
   constructor(private productService: ProductService) {
