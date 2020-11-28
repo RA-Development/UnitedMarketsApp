@@ -1,13 +1,17 @@
 <div class="product-tiles">
   <div class="row">
     <div class="col-auto" *ngFor="let product of (filteredList$ | async)?.list">
-      <div class="card" >
+      <div class="card">
         <div class="card-body">
+          <div class="prodContainer">
+            <img src="assets/{{product.id}}.jpg" class="prodImg" alt="...">
+          </div>
           <h5 class="card-title">{{product.name}}</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="card-text">
+            <p>{{product?.origin?.name}}</p>
+            <p>{{product?.price}} kr.</p>
+          </div>
+          <button class="btn btn-primary m-2">Add to Cart</button>
         </div>
       </div>
     </div>

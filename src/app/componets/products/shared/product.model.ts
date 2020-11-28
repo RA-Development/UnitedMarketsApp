@@ -1,5 +1,5 @@
 import {Market} from '../../../shared/models/market.model';
-import {CountryOrigin} from '../../../shared/models/countryOrigin.model';
+import {Origin} from '../../../shared/models/origin.model';
 
 export class Product {
   id?: number;
@@ -8,7 +8,7 @@ export class Product {
   amount: number;
   marketId: number;
   market: Market;
-  countryOriginId: number;
-  countryOrigin: CountryOrigin;
+  originId: number;
+  origin: Origin;
 
 }

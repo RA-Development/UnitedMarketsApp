@@ -1,6 +1,6 @@
 import {Product} from '../../componets/products/shared/product.model';
 
-export class CountryOrigin {
+export class Origin {
   id?: number;
   name: string;
   products: Product[];

@@ -5,6 +5,7 @@ import {FilteredList} from '../../../shared/models/filteredList.model';
 import {ProductService} from '../shared/product.service';
 import {Filter} from '../../../shared/models/filter.model';
 import {ActivatedRoute} from '@angular/router';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
