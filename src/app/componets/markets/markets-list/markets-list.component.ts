@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Market} from '../../shared/models/market.model';
-import {MarketService} from '../../shared/services/market.service';
+import {Market} from '../shared/market.model';
+import {MarketService} from '../shared/market.service';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
