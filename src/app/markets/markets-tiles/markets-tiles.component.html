@@ -1,0 +1,17 @@
+<h1>
+  Welcome to {{title}}!
+</h1>
+
+<div class="market-cards">
+    <div class="row">
+      <div class="col-auto mx-auto" *ngFor="let market of (markets$ | async)">
+        <div class="card">
+          <img class="card-img" src="assets/markets/{{market.name}}.png" alt="Card image cap">
+          <div class="card-body">
+            <button type="button" class="btn btn-select btn-sm btn-block">Select {{market.name}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {Market} from '../../shared/models/market.model';
-import {MarketService} from '../../shared/services/market.service';
 import {Observable, of} from 'rxjs';
+import {MarketService} from '../../shared/services/market.service';
+import {Market} from '../../shared/models/market.model';
 import {catchError, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-markets-list',
-  templateUrl: './markets-list.component.html',
-  styleUrls: ['./markets-list.component.css']
+  selector: 'app-markets-tiles',
+  templateUrl: './markets-tiles.component.html',
+  styleUrls: ['./markets-tiles.component.css']
 })
-export class MarketsListComponent implements OnInit {
+export class MarketsTilesComponent implements OnInit {
+  title = 'United Markets';
   markets$: Observable<Market[]>;
   err: string;
 
@@ -25,10 +26,6 @@ export class MarketsListComponent implements OnInit {
           return of([]);
         })
       );
-      // .subscribe(listOfMarkets => this.markets = listOfMarkets);
-  }
-
-  myFunc(event): void {
-    console.log(event.currentTarget.value);
+    // .subscribe(listOfMarkets => this.markets = listOfMarkets);
   }
 }

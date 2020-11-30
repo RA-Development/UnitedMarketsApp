@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MarketsTilesComponent } from './markets/markets-tiles/markets-tiles.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MarketsListComponent,
     NavbarComponent,
     WelcomeComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    MarketsTilesComponent
   ],
   imports: [
     BrowserModule,
