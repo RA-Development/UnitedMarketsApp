@@ -12,7 +12,6 @@ import {catchError, tap} from 'rxjs/operators';
 export class MarketsListComponent implements OnInit {
   markets$: Observable<Market[]>;
   err: string;
-  value: number;
   constructor(private marketService: MarketService) { }
 
   ngOnInit(): void {
@@ -28,7 +27,7 @@ export class MarketsListComponent implements OnInit {
       // .subscribe(listOfMarkets => this.markets = listOfMarkets);
   }
 
-  myFunc(value: number) {
-    console.log(value);
+  myFunc(event): void {
+    console.log(event.currentTarget.value);
   }
 }
