@@ -8,9 +8,14 @@
           </div>
           <h5 class="card-title">{{product.name}}</h5>
           <div class="card-text">
-            {{product.amount}} {{product.amountUnit.name}}, {{product?.origin?.name}}<br>
-            {{product.pricePerUnit}} /{{product.amountUnit.name}}
-            <p id="priceTag">{{product.price}} kr.</p>
+            <div *ngIf="product.amountUnit.name == 'piece' ;else Other">
+              {{product.amount}} {{product.amount > 1 ? "pieces" : "piece"}}, {{product?.origin?.name}}<br>
+            </div>
+            <ng-template #Other>
+              {{product.amount}} {{product.amountUnit.name}}, {{product?.origin?.name}}<br>
+            </ng-template>
+            {{product.pricePerUnit | number: "1.2-2"}} kr./{{product.amountUnit.name}}
+            <p id="priceTag">{{product.price | number:"1.2-2"}} kr.</p>
           </div>
           <button class="btn btn-success">Add to Cart</button>
         </div>
