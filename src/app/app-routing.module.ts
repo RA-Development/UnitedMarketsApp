@@ -5,11 +5,13 @@ import {ProductListComponent} from './componets/products/product-list/product-li
 import {MarketsListComponent} from './componets/markets/markets-list/markets-list.component';
 import {WelcomeComponent} from './componets/welcome/welcome.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
+import {HomeComponent} from './componets/home/home.component';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'products', component: ProductListComponent},
-  {path: 'markets', component: MarketsListComponent}
+  {path: 'markets', component: MarketsListComponent},
+  {path: 'home', component: HomeComponent},
 
 ];
 

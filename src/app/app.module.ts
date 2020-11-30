@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './componets/welcome/welcome.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MarketsListComponent } from './componets/markets/markets-list/markets-list.component';
+import { HomeComponent } from './componets/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MarketsListComponent } from './componets/markets/markets-list/markets-l
     MarketsListComponent,
     WelcomeComponent,
     NavbarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
