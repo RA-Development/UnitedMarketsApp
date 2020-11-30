@@ -1,14 +1,19 @@
 import {Market} from '../../../shared/models/market.model';
 import {Origin} from '../../../shared/models/origin.model';
+import {AmountUnit} from '../../../shared/models/amountUnit.model';
 
 export class Product {
-  id?: number;
+  id: number;
   name: string;
-  price: string;
+  price: number;
+  pricePerUnit: number;
   amount: number;
   marketId: number;
   market: Market;
   originId: number;
   origin: Origin;
+  amountUnitId: number;
+  amountUnit: AmountUnit;
+
 
 }

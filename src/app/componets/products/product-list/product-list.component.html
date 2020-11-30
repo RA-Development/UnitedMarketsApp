@@ -8,10 +8,11 @@
           </div>
           <h5 class="card-title">{{product.name}}</h5>
           <div class="card-text">
-            <p>{{product?.origin?.name}}</p>
-            <p>{{product?.price}} kr.</p>
+            {{product.amount}} {{product.amountUnit.name}}, {{product?.origin?.name}}<br>
+            {{product.pricePerUnit}} /{{product.amountUnit.name}}
+            <p id="priceTag">{{product.price}} kr.</p>
           </div>
-          <button class="btn btn-primary m-2">Add to Cart</button>
+          <button class="btn btn-success">Add to Cart</button>
         </div>
       </div>
     </div>

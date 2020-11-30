@@ -5,6 +5,7 @@ import {Filter} from '../../../shared/models/filter.model';
 import {Observable} from 'rxjs';
 import {FilteredList} from '../../../shared/models/filteredList.model';
 import {Product} from './product.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

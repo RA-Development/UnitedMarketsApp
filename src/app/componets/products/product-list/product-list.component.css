@@ -1,21 +1,24 @@
-.card{
+.card {
   margin-top: 30px;
   width: 200px;
-  height: 400px;
+  height: 350px;
 }
 
-.buttonChangeAmount{
-  margin: 10px;
 
-}
-
-.prodContainer{
+.prodContainer {
   max-width: 100%;
-  height: 200px;
-  align-content: center;
+  height: 150px;
+
 }
 
-.prodImg{
+.prodImg {
+  display: block;
   max-height: 100%;
   max-width: 100%;
 }
+
+#priceTag{
+  font-size: 20px;
+}
+
+
