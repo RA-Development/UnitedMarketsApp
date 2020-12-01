@@ -1,18 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {ProductListComponent} from './componets/products/product-list/product-list.component';
-import {MarketsListComponent} from './componets/markets/markets-list/markets-list.component';
-import {WelcomeComponent} from './componets/welcome/welcome.component';
-import {NavbarComponent} from './shared/navbar/navbar.component';
-import {HomeComponent} from './componets/home/home.component';
+import {ProductListComponent} from './components/products/product-list/product-list.component';
+import {WelcomeComponent} from './components/welcome/welcome.component';
+import {MarketComponent} from './components/market/market.component';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'products', component: ProductListComponent},
-  {path: 'markets', component: MarketsListComponent},
-  {path: 'home', component: HomeComponent},
-
+  {path: 'market/:id', component: MarketComponent},
 ];
 
 @NgModule({

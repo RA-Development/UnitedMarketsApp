@@ -1,6 +1,6 @@
 import {Product} from '../../products/shared/product.model';
 
-export class Market {
+export interface Market {
   id: number;
   name: string;
   products: Product[];

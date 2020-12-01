@@ -1,0 +1,23 @@
+.card{
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 200px;
+  height: 170px;
+}
+
+.btn-select{
+  border-color: steelblue;
+  color: steelblue;
+}
+
+.btn-select:hover{
+  background-color: steelblue;
+  color: white;
+}
+
+.card-img{
+  /*hard-coding the position, maybe there is a way to center?*/
+  max-height: 100%;
+  max-width: 100%;
+}

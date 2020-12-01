@@ -2,30 +2,34 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {ProductListComponent} from './componets/products/product-list/product-list.component';
-import {RouterModule} from '@angular/router';
+import {ProductListComponent} from './components/products/product-list/product-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { WelcomeComponent } from './componets/welcome/welcome.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { MarketsListComponent } from './componets/markets/markets-list/markets-list.component';
-import { HomeComponent } from './componets/home/home.component';
+import { MarketListComponent } from './components/markets/market-list/market-list.component';
+import { MarketTilesComponent } from './components/markets/market-tiles/market-tiles.component';
+import { MarketComponent } from './components/market/market.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    MarketsListComponent,
+    MarketListComponent,
     WelcomeComponent,
     NavbarComponent,
-    HomeComponent,
+    MarketTilesComponent,
+    MarketComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

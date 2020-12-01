@@ -1,0 +1,14 @@
+<div *ngIf="!err && markets$ | async as markets else loading">
+  <select [ngModel]=id (ngModelChange)="myFunc($event)">
+    <option *ngFor="let market of markets"
+            [ngValue]="market.id">{{ market.name }}
+    </option>
+  </select>
+</div>
+
+<ng-template #loading>
+  <p id='p1'>Loading ...</p>
+  <!--<p>Loading ...</p>-->
+</ng-template>
+
+<!--<p *ngIf="err">Loading error... {{err}}</p>-->
