@@ -1,6 +1,6 @@
-import {Market} from '../../markets/shared/market.model';
 import {Origin} from '../../../shared/models/origin.model';
 import {AmountUnit} from '../../../shared/models/amountUnit.model';
+import {Market} from '../../markets/shared/market.model';
 
 export class Product {
   id: number;

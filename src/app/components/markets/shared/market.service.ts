@@ -8,7 +8,8 @@ import {environment} from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class MarketService {
-  marketApiUrl = environment.apiUrl + 'markets';
+  private marketApiUrl = environment.apiUrl + 'markets';
+
   constructor(private http: HttpClient) {
   }
 

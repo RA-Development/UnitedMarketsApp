@@ -1,4 +1,4 @@
-import {Product} from '../../componets/products/shared/product.model';
+import {Product} from '../../components/products/shared/product.model';
 
 export class AmountUnit {
   id?: number;
