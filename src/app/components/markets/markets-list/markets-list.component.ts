@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Market} from '../../shared/models/market.model';
-import {MarketService} from '../../shared/services/market.service';
+import {Market} from '../shared/market.model';
+import {MarketService} from '../shared/market.service';
 import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, switchMap, take, tap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-markets-list',
@@ -11,13 +12,19 @@ import {catchError, tap} from 'rxjs/operators';
 })
 export class MarketsListComponent implements OnInit {
   markets$: Observable<Market[]>;
+  id: number;
   err: string;
 
-  constructor(private marketService: MarketService) { }
+  constructor(private marketService: MarketService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.markets$ = this.marketService.getMarkets()
+    this.markets$ = this.route.paramMap
       .pipe(
+        take(1),
+        switchMap(params => {
+          this.id = +params.get('id');
+          return this.marketService.getMarkets();
+        }),
         tap(() => this.err = undefined ),
         catchError(err => {
           this.err = err.error ?? err.message;
@@ -25,10 +32,9 @@ export class MarketsListComponent implements OnInit {
           return of([]);
         })
       );
-      // .subscribe(listOfMarkets => this.markets = listOfMarkets);
   }
 
   myFunc(event): void {
-    console.log(event.currentTarget.value);
+    console.log(event);
   }
 }

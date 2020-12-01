@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {MarketService} from '../../shared/services/market.service';
-import {Market} from '../../shared/models/market.model';
+import {MarketService} from '../shared/market.service';
+import {Market} from '../shared/market.model';
 import {catchError, tap} from 'rxjs/operators';
 
 @Component({
@@ -10,7 +10,6 @@ import {catchError, tap} from 'rxjs/operators';
   styleUrls: ['./markets-tiles.component.css']
 })
 export class MarketsTilesComponent implements OnInit {
-  title = 'United Markets';
   markets$: Observable<Market[]>;
   err: string;
 
@@ -27,5 +26,9 @@ export class MarketsTilesComponent implements OnInit {
         })
       );
     // .subscribe(listOfMarkets => this.markets = listOfMarkets);
+  }
+
+  selectMarket(market: Market): void {
+    console.log(market);
   }
 }

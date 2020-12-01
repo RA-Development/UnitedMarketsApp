@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Market} from './shared/models/market.model';
+import {Market} from './components/markets/shared/market.model';
 
 @Component({
   selector: 'app-root',
