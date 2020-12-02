@@ -1,13 +1,10 @@
-<div class="market-cards">
-  <div class="row">
-    <div class="col-auto mx-auto" *ngFor="let market of (markets$ | async)">
-      <div class="card">
-        <img class="card-img" src="assets/markets/{{market.name}}.png" alt="Card image cap">
-        <div class="card-body">
-          <button (click)="selectMarket(market)" type="button" class="btn btn-select btn-sm btn-block"
-                  [routerLink]="'/market/'+market.id">Select {{market.name}}</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class = "market-container">
+  <mat-card class="market-cards" *ngFor="let market of (markets$ | async)">
+    <img mat-card-image class="card-img" src="assets/markets/{{market.name}}.png" alt="Card image cap">
+    <mat-card-actions>
+      <button mat-raised-button color="primary" class="btn btn-select btn-sm btn-block" (click)="selectMarket(market)"
+              [routerLink]="'/market/'+market.id">SELECT</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
+

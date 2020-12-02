@@ -6,7 +6,7 @@ import {catchError, switchMap, take, tap} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-markets-list',
+  selector: 'app-market-list',
   templateUrl: './market-list.component.html',
   styleUrls: ['./market-list.component.css']
 })
