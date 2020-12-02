@@ -1,26 +1,44 @@
+<div class="card-container" *ngIf="filteredList$ | async as fList">
+  <mat-card class="productCard" *ngFor="let product of fList.list">
+    <div class="imgContainer">
+      <img src="assets/{{product.id}}.jpg" class="prodImg" alt="...">
+    </div>
+    <mat-card-content>
+      <h1>{{product.name}}</h1>
+      <div *ngIf="product.amountUnit.name == 'piece' ;else Other">
+        {{product.amount}} {{product.amount > 1 ? "pieces" : "piece"}}, {{product?.origin?.name}}<br>
+      </div>
+      <ng-template #Other>
+        {{product.amount}} {{product.amountUnit.name}}, {{product?.origin?.name}}<br>
+      </ng-template>
+      {{product.pricePerUnit | number: "1.2-2"}} kr./{{product.amountUnit.name}}
+      <p id="priceTag">{{product.price | number:"1.2-2"}} kr.</p>
+    </mat-card-content>
+    <mat-card-actions align="center">
+      <button mat-raised-button color="primary">Add to Cart</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+<!--
+
 <div class="product-tiles">
   <div class="row">
     <div class="col-auto" *ngFor="let product of (filteredList$ | async)?.list">
       <div class="card">
         <div class="card-body">
           <div class="prodContainer">
-            <img src="assets/{{product.id}}.jpg" class="prodImg" alt="...">
+
           </div>
-          <h5 class="card-title">{{product.name}}</h5>
-          <div class="card-text">
-            <div *ngIf="product.amountUnit.name == 'piece' ;else Other">
-              {{product.amount}} {{product.amount > 1 ? "pieces" : "piece"}}, {{product?.origin?.name}}<br>
-            </div>
-            <ng-template #Other>
-              {{product.amount}} {{product.amountUnit.name}}, {{product?.origin?.name}}<br>
-            </ng-template>
-            {{product.pricePerUnit | number: "1.2-2"}} kr./{{product.amountUnit.name}}
-            <p id="priceTag">{{product.price | number:"1.2-2"}} kr.</p>
-          </div>
+
+
           <button class="btn btn-success">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+-->
+
 

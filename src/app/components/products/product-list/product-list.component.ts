@@ -5,7 +5,6 @@ import {FilteredList} from '../../../shared/models/filteredList.model';
 import {ProductService} from '../shared/product.service';
 import {Filter} from '../../../shared/models/filter.model';
 import {ActivatedRoute} from '@angular/router';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -20,14 +19,17 @@ export class ProductListComponent implements OnInit {
     itemsPerPage: 0,
     searchField: '',
     searchValue: '',
-    marketId: 1
+    marketId: 0
   };
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.filter.marketId = +this.route.snapshot.paramMap.get('id');
     this.filteredList$ = this.productService.getFilteredList(this.filter);
   }
+
 
 }
