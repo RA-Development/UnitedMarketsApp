@@ -5,7 +5,7 @@ import {Market} from '../shared/market.model';
 import {catchError, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-markets-tiles',
+  selector: 'app-market-tiles',
   templateUrl: './market-tiles.component.html',
   styleUrls: ['./market-tiles.component.css']
 })
