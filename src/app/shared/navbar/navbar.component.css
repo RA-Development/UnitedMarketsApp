@@ -19,3 +19,7 @@ a:hover {
   font-size: 11px;
   line-height: 1.2;
 }
+
+.appToolbar{
+  height: 80px;
+}

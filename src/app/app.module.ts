@@ -6,7 +6,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
-import {MarketListComponent} from './components/markets/market-list/market-list.component';
 import {MarketTilesComponent} from './components/markets/market-tiles/market-tiles.component';
 import {MarketComponent} from './components/market/market.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -20,7 +19,6 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     AppComponent,
     ProductListComponent,
-    MarketListComponent,
     WelcomeComponent,
     NavbarComponent,
     MarketTilesComponent,
@@ -33,10 +31,11 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
