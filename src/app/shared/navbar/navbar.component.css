@@ -11,15 +11,20 @@ a:hover {
   color: gold;
 }
 
-.title{
+.title {
   margin: auto;
 }
 
-.info{
+.info {
   font-size: 11px;
   line-height: 1.2;
 }
 
 .appToolbar{
   height: 80px;
+}
+
+.actualPrice {
+  margin-left: 20px;
+  margin-top: 10px;
 }

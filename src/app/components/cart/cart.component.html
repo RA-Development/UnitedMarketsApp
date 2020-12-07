@@ -1,0 +1,6 @@
+<mat-card *ngIf="productCart as products">
+  <mat-card-content *ngFor="let product of products ">
+    {{product.name}}
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,17 @@
+<div class="imgContainer">
+  <img src="assets/{{productItem.id}}.jpg" class="prodImg" alt="...">
+</div>
+<mat-card-content>
+  <h1>{{productItem.name}}</h1>
+  <div *ngIf="productItem.amountUnit.name === 'piece' ;else Other">
+    {{productItem.amount}} {{productItem.amount > 1 ? "pieces" : "piece"}}, {{productItem?.origin?.name}}<br>
+  </div>
+  <ng-template #Other>
+    {{productItem.amount}} {{productItem.amountUnit.name}}, {{productItem?.origin?.name}}<br>
+  </ng-template>
+  {{productItem.pricePerUnit | number: "1.2-2"}} kr./{{productItem.amountUnit.name}}
+  <p id="priceTag">{{productItem.price | number:"1.2-2"}} kr.</p>
+</mat-card-content>
+<mat-card-actions align="center">
+  <button mat-raised-button color="primary">Add to Cart</button>
+</mat-card-actions>
