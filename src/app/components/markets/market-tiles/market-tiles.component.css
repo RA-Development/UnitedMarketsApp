@@ -1,24 +1,19 @@
 .market-container {
+  margin-left: 100px;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.market-cards{
-  margin: 50px;
-  width: 18%;
+
+.market{
+  width: auto;
+  display: block;
   text-align: center;
+
 }
 
-.btn-select{
-}
+.market-img {
+  max-width: 100px;
+  margin: 10px;
 
-.btn-select:hover{
-  background-color: darkslateblue;
-  color: white;
-}
-
-.card-img{
-  max-height: 100%;
-  max-width: 100%;
-  padding-top: 15px;
 }
