@@ -2,20 +2,6 @@
   <div class="market" *ngFor="let market of markets">
     <img src="assets/markets/{{market.id}}.png" alt="" class="market-img" (click)="initProducts(market.id)"
          routerLink="market/{{market.id}}">
-    <!--
-     <mat-card class=" market-cards
-    " *ngFor="let market of (markets$ | async)">
-
-    <img mat-card-image class="card-img" src="assets/markets/{{market.name}}.png" alt="Card image cap">
-    <mat-card-actions>
-      <button mat-raised-button color="primary" class="btn btn-select btn-sm btn-block" (click)="selectMarket(market)"
-              [routerLink]="'/market/'+market.id">SELECT
-      </button>
-    </mat-card-actions>
-    </mat-card>
-    -->
-
-
   </div>
 </div>
 

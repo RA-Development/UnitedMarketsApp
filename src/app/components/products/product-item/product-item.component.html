@@ -13,5 +13,5 @@
   <p id="priceTag">{{productItem.price | number:"1.2-2"}} kr.</p>
 </mat-card-content>
 <mat-card-actions align="center">
-  <button mat-raised-button color="primary">Add to Cart</button>
+  <button mat-raised-button color="primary" (click)="addToCart()">Add to Cart</button>
 </mat-card-actions>

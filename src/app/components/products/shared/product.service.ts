@@ -23,4 +23,10 @@ export class ProductService {
     url = url + 'marketId=' + filter.marketId;
     return this.http.get<FilteredList<Product>>(url);
   }
+
+
+
+
+
+
 }
