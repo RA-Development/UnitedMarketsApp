@@ -1,25 +1,10 @@
-a {
-  display: block;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+
+.btnCartContainer {
+  position: absolute;
+  right: 30px;
 }
 
-a:hover {
-  color: gold;
-}
 
-.title{
-  margin: auto;
-}
-
-.info{
-  font-size: 11px;
-  line-height: 1.2;
-}
-
-.appToolbar{
+.appToolbar {
   height: 80px;
 }

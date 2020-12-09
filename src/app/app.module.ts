@@ -11,9 +11,13 @@ import {MarketComponent} from './components/market/market.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {ProductItemComponent} from './components/products/product-item/product-item.component';
+import {CartComponent} from './components/cart/cart.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import {MatIconModule} from '@angular/material/icon';
     WelcomeComponent,
     NavbarComponent,
     MarketTilesComponent,
-    MarketComponent
+    MarketComponent,
+    ProductItemComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +39,12 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
 
     MatCardModule,
+    MatToolbarModule,
+    MatBadgeModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
