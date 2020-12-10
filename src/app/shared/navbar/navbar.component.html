@@ -1,3 +1,5 @@
 <mat-toolbar color="primary" class="mat-elevation-z6 appToolbar">
-  <app-market-tiles></app-market-tiles>
+  <h1 *ngIf=isAdministration()>{{title}}</h1>
+  <a *ngIf=isLoggedIn() [routerLink]="['/manage/login']">Logout</a>
+  <app-market-tiles *ngIf=!isAdministration()></app-market-tiles>
 </mat-toolbar>

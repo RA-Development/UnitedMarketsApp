@@ -14,6 +14,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import { LoginAdminComponent } from './components/login-admin/login-admin.component';
+import { OrderListComponent } from './components/orders/order-list.component';
+import {AuthGuard} from './components/login-admin/auth.guard';
+import { AuthenticationService } from './components/login-admin/authentication.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,9 @@ import {MatIconModule} from '@angular/material/icon';
     WelcomeComponent,
     NavbarComponent,
     MarketTilesComponent,
-    MarketComponent
+    MarketComponent,
+    LoginAdminComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +44,13 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
