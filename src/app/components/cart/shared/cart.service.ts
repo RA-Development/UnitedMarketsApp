@@ -3,13 +3,17 @@ import {CartItem} from '../../../shared/models/cartItem.model';
 import {Product} from '../../products/shared/product.model';
 import {OrderLine} from '../../../shared/models/orderLine.model';
 import {element} from 'protractor';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Order} from '../../../shared/models/order.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  private apiUrl = environment.apiUrl + 'orders';
 
   orderLines: OrderLine[] = [];
   private subTotalPrice = new Subject<number>();
@@ -17,7 +21,7 @@ export class CartService {
   private qty = new Subject<number>();
   qty$ = this.qty.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const loadedOrderLines = this.loadOrderLines();
     this.orderLines = loadedOrderLines ? loadedOrderLines : [];
 
@@ -46,11 +50,9 @@ export class CartService {
       currentOrderLine.quantity++;
     } else {
       const freshOrderLine = new OrderLine();
-      {
-        freshOrderLine.productId = product.id;
-        freshOrderLine.product = product;
-        freshOrderLine.quantity = 1;
-      }
+      freshOrderLine.productId = product.id;
+      freshOrderLine.product = product;
+      freshOrderLine.quantity = 1;
       this.orderLines.push(freshOrderLine);
 
     }
@@ -97,6 +99,11 @@ export class CartService {
       subTotalPrice += orderLine.quantity * orderLine.product.price;
     }
     return subTotalPrice;
+  }
+
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, order);
   }
 }
 

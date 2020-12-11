@@ -5,3 +5,8 @@ table {
 tr.mat-footer-row {
   font-weight: bold;
 }
+
+.btnPlaceOrder {
+  float: right;
+  margin: 30px;
+}
