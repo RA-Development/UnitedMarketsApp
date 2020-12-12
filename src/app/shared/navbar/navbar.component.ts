@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../components/cart/shared/cart.service';
-import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,14 +8,22 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  title = 'United Markets';
+  titleAdministration = 'United Markets Administration';
+  titleWebStore = 'United Markets';
 
-
-  constructor(private cartService: CartService) {
-  }
+  constructor(private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  isAdministration(): boolean {
+    return this.router.url.includes('manage');
+  }
 
+  isLoggedIn(): boolean{
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.isAdministration() && currentUser) {
+      return true;
+    }
+  }
 }

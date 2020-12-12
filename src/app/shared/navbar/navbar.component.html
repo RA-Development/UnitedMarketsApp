@@ -1,8 +1,16 @@
 <mat-toolbar color="primary" class="mat-elevation-z6 appToolbar">
+  <h1 *ngIf=isAdministration()>{{titleAdministration}}</h1>
+  <button *ngIf=isLoggedIn() class="btnLogout" routerLink="/manage/login"
+          mat-raised-button
+          color="accent"
+          matBadgePosition="after"
+          matBadgeColor="warn">
+    Logout
+  </button>
 
-  <button mat-raised-button routerLink="/">United Markets</button>
-  <app-market-tiles></app-market-tiles>
-  <div class="btnCartContainer">
+  <button  *ngIf=!isAdministration() mat-raised-button routerLink="/">{{titleWebStore}}</button>
+  <app-market-tiles *ngIf=!isAdministration()></app-market-tiles>
+  <div *ngIf=!isAdministration() class="btnCartContainer">
     <button routerLink="/cart"
             mat-raised-button
             color="accent"

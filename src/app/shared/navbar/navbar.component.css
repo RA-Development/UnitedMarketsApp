@@ -1,10 +1,13 @@
+.appToolbar {
+  height: 80px;
+}
 
 .btnCartContainer {
   position: absolute;
   right: 30px;
 }
 
-
-.appToolbar {
-  height: 80px;
+.btnLogout{
+  position: absolute;
+  right: 30px;
 }
