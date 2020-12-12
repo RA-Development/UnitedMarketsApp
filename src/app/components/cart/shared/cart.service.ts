@@ -25,8 +25,11 @@ export class CartService {
     const loadedOrderLines = this.loadOrderLines();
     this.orderLines = loadedOrderLines ? loadedOrderLines : [];
 
-    this.setCartCount(this.getTotalQuantity(this.orderLines));
-    this.setTotalPrice(this.getSubTotalPrice(this.orderLines));
+    if (this.orderLines) {
+      this.setCartCount(this.getTotalQuantity(this.orderLines));
+      this.setTotalPrice(this.getSubTotalPrice(this.orderLines));
+
+    }
   }
 
   setTotalPrice(totalPrice: number): void {
@@ -104,6 +107,12 @@ export class CartService {
 
   createOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.apiUrl, order);
+  }
+
+  clearCart(): void {
+    localStorage.removeItem('orderLines');
+    localStorage.removeItem('subTotal');
+    localStorage.removeItem('qty');
   }
 }
 

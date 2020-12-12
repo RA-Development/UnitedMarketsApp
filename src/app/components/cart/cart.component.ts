@@ -4,7 +4,10 @@ import {CartService} from './shared/cart.service';
 import {OrderLine} from '../../shared/models/orderLine.model';
 import {of, Subscription} from 'rxjs';
 import {Order} from '../../shared/models/order.model';
-import {catchError, take, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../dialog/dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -19,18 +22,23 @@ export class CartComponent implements OnInit, OnDestroy {
     'quantity',
     'remove product',
     'total'];
-  dataSource: OrderLine[];
+  dataSource: OrderLine[] = [];
   totalQuantity: number;
   subTotalPrice: number;
   private countSub: Subscription;
   private subTotalSub: Subscription;
   private err: undefined;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar
+  ) {
     this.dataSource = this.cartService.loadOrderLines();
-    //  extra
-    this.totalQuantity = this.cartService.getTotalQuantity(this.dataSource);
-    this.subTotalPrice = this.cartService.getSubTotalPrice(this.dataSource);
+
+    if (this.dataSource) {
+      this.totalQuantity = this.cartService.getTotalQuantity(this.dataSource);
+      this.subTotalPrice = this.cartService.getSubTotalPrice(this.dataSource);
+    }
 
     this.subTotalSub = this.cartService.subTotalPrice$.subscribe(subTotal => {
       this.subTotalPrice = subTotal;
@@ -78,6 +86,9 @@ export class CartComponent implements OnInit, OnDestroy {
         catchError(err => {
           this.err = err.error ?? err.message;
           console.log(this.err);
+          console.log(() => {
+            return;
+          });
           return of([]);
         })
       )
@@ -87,15 +98,32 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
     if (this.subTotalSub) {
       this.subTotalSub.unsubscribe();
     }
     if (this.countSub) {
       this.countSub.unsubscribe();
     }
-
-
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'true') {
+        this.placeOrder();
+
+        // this.cartService.clearCart();
+        this.snackBar.open('Order Successfully created ✔.', '', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          politeness: 'assertive'
+        });
+
+
+      }
+    });
+
+  }
 }

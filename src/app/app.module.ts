@@ -18,8 +18,14 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {DialogComponent} from './components/dialog/dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
+  entryComponents: [
+    DialogComponent
+  ],
   declarations: [
     AppComponent,
     ProductListComponent,
@@ -28,7 +34,8 @@ import {MatTableModule} from '@angular/material/table';
     MarketTilesComponent,
     MarketComponent,
     ProductItemComponent,
-    CartComponent
+    CartComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +52,8 @@ import {MatTableModule} from '@angular/material/table';
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
