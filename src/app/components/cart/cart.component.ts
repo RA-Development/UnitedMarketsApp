@@ -8,6 +8,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -31,13 +32,14 @@ export class CartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private route: Router
   ) {
     this.dataSource = this.cartService.loadOrderLines();
 
     if (this.dataSource) {
       this.totalQuantity = this.cartService.getTotalQuantity(this.dataSource);
-      this.subTotalPrice = this.cartService.getSubTotalPrice(this.dataSource);
+      this.subTotalPrice = this.cartService.getTotalPrice(this.dataSource);
     }
 
     this.subTotalSub = this.cartService.subTotalPrice$.subscribe(subTotal => {
@@ -66,16 +68,17 @@ export class CartComponent implements OnInit, OnDestroy {
 
   placeOrder(): void {
     const products = this.cartService.loadOrderLines();
-    const totalPrice = this.cartService.getSubTotalPrice(this.dataSource);
+    const totalPrice = this.cartService.getTotalPrice(this.dataSource);
 
     for (const p of products) {
+      p.subTotalPrice = p.product.price * p.quantity;
       p.product = undefined;
     }
 
     const order: Order = {
       products,
-      billingAddress: 'Esbjerg 8',
-      shippingAddress: 'Esbjerg 7',
+      billingAddress: 'Chris Hansen, Spansbjerg Kirkevej 7, Esbjerg 6700, Denmark',
+      shippingAddress: 'Chris Hansen, Spansbjerg Kirkevej 80, Esbjerg 6700, Denmark',
       orderStatusId: 4,
       totalPrice
     };
@@ -86,14 +89,14 @@ export class CartComponent implements OnInit, OnDestroy {
         catchError(err => {
           this.err = err.error ?? err.message;
           console.log(this.err);
-          console.log(() => {
-            return;
-          });
           return of([]);
         })
       )
       .subscribe(createdOrder => {
         console.log(JSON.stringify(createdOrder));
+        this.cartService.clearCart();
+        this.route.navigateByUrl('/');
+
       });
   }
 

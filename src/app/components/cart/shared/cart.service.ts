@@ -27,7 +27,7 @@ export class CartService {
 
     if (this.orderLines) {
       this.setCartCount(this.getTotalQuantity(this.orderLines));
-      this.setTotalPrice(this.getSubTotalPrice(this.orderLines));
+      this.setTotalPrice(this.getTotalPrice(this.orderLines));
 
     }
   }
@@ -60,8 +60,6 @@ export class CartService {
 
     }
     this.saveChanges();
-    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
-    this.setTotalPrice(this.getSubTotalPrice(this.loadOrderLines()));
   }
 
   removeFromCart(product: Product): void {
@@ -77,10 +75,7 @@ export class CartService {
         }
       });
     }
-
     this.saveChanges();
-    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
-    this.setTotalPrice(this.getSubTotalPrice(this.loadOrderLines()));
   }
 
   getTotalQuantity(orderLines: OrderLine[]): number {
@@ -93,15 +88,17 @@ export class CartService {
 
   saveChanges(): void {
     localStorage.setItem('orderLines', JSON.stringify(this.orderLines));
+    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
+    this.setTotalPrice(this.getTotalPrice(this.loadOrderLines()));
   }
 
 
-  getSubTotalPrice(dataSource: OrderLine[]): number {
-    let subTotalPrice = 0;
+  getTotalPrice(dataSource: OrderLine[]): number {
+    let totalPrice = 0;
     for (const orderLine of dataSource) {
-      subTotalPrice += orderLine.quantity * orderLine.product.price;
+      totalPrice += orderLine.quantity * orderLine.product.price;
     }
-    return subTotalPrice;
+    return totalPrice;
   }
 
 
@@ -110,9 +107,8 @@ export class CartService {
   }
 
   clearCart(): void {
-    localStorage.removeItem('orderLines');
-    localStorage.removeItem('subTotal');
-    localStorage.removeItem('qty');
+    this.orderLines = [];
+    this.saveChanges();
   }
 }
 
