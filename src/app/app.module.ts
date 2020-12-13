@@ -18,14 +18,20 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
-import { LoginAdminComponent } from './components/login-admin/login-admin.component';
-import { OrderListComponent } from './components/orders/order-list.component';
+import {LoginAdminComponent} from './components/login-admin/login-admin.component';
+import {OrderListComponent} from './components/orders/order-list.component';
 import {AuthGuard} from './components/login-admin/auth.guard';
-import { AuthenticationService } from './components/login-admin/authentication.service';
+import {AuthenticationService} from './components/login-admin/authentication.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+import {DialogComponent} from './components/dialog/dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
+  entryComponents: [
+    DialogComponent
+  ],
   declarations: [
     AppComponent,
     ProductListComponent,
@@ -36,7 +42,8 @@ import {MatInputModule} from '@angular/material/input';
     ProductItemComponent,
     CartComponent,
     LoginAdminComponent,
-    OrderListComponent
+    OrderListComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,9 @@ import {MatInputModule} from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     MatTableModule,
-    MatToolbarModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatToolbarModule
   ],
   providers: [
     AuthGuard,

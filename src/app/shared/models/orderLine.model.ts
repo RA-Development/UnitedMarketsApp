@@ -2,9 +2,9 @@ import {Product} from '../../components/products/shared/product.model';
 import {Order} from './order.model';
 
 export class OrderLine {
-  id: number;
+  id?: number;
   productId: number;
-  product: Product;
+  product?: Product;
   quantity: number;
   orderId?: number;
   order?: Order;

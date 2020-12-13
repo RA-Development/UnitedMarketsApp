@@ -3,13 +3,17 @@ import {CartItem} from '../../../shared/models/cartItem.model';
 import {Product} from '../../products/shared/product.model';
 import {OrderLine} from '../../../shared/models/orderLine.model';
 import {element} from 'protractor';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Order} from '../../../shared/models/order.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  private apiUrl = environment.apiUrl + 'orders';
 
   orderLines: OrderLine[] = [];
   private subTotalPrice = new Subject<number>();
@@ -17,12 +21,15 @@ export class CartService {
   private qty = new Subject<number>();
   qty$ = this.qty.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const loadedOrderLines = this.loadOrderLines();
     this.orderLines = loadedOrderLines ? loadedOrderLines : [];
 
-    this.setCartCount(this.getTotalQuantity(this.orderLines));
-    this.setTotalPrice(this.getSubTotalPrice(this.orderLines));
+    if (this.orderLines) {
+      this.setCartCount(this.getTotalQuantity(this.orderLines));
+      this.setTotalPrice(this.getTotalPrice(this.orderLines));
+
+    }
   }
 
   setTotalPrice(totalPrice: number): void {
@@ -46,17 +53,13 @@ export class CartService {
       currentOrderLine.quantity++;
     } else {
       const freshOrderLine = new OrderLine();
-      {
-        freshOrderLine.productId = product.id;
-        freshOrderLine.product = product;
-        freshOrderLine.quantity = 1;
-      }
+      freshOrderLine.productId = product.id;
+      freshOrderLine.product = product;
+      freshOrderLine.quantity = 1;
       this.orderLines.push(freshOrderLine);
 
     }
     this.saveChanges();
-    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
-    this.setTotalPrice(this.getSubTotalPrice(this.loadOrderLines()));
   }
 
   removeFromCart(product: Product): void {
@@ -72,10 +75,7 @@ export class CartService {
         }
       });
     }
-
     this.saveChanges();
-    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
-    this.setTotalPrice(this.getSubTotalPrice(this.loadOrderLines()));
   }
 
   getTotalQuantity(orderLines: OrderLine[]): number {
@@ -88,15 +88,27 @@ export class CartService {
 
   saveChanges(): void {
     localStorage.setItem('orderLines', JSON.stringify(this.orderLines));
+    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
+    this.setTotalPrice(this.getTotalPrice(this.loadOrderLines()));
   }
 
 
-  getSubTotalPrice(dataSource: OrderLine[]): number {
-    let subTotalPrice = 0;
+  getTotalPrice(dataSource: OrderLine[]): number {
+    let totalPrice = 0;
     for (const orderLine of dataSource) {
-      subTotalPrice += orderLine.quantity * orderLine.product.price;
+      totalPrice += orderLine.quantity * orderLine.product.price;
     }
-    return subTotalPrice;
+    return totalPrice;
+  }
+
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, order);
+  }
+
+  clearCart(): void {
+    this.orderLines = [];
+    this.saveChanges();
   }
 }
 
