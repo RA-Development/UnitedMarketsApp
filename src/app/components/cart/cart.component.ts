@@ -113,16 +113,17 @@ export class CartComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'true') {
+      if (result === 'true' && this.dataSource.length > 0) {
         this.placeOrder();
 
         // this.cartService.clearCart();
-        this.snackBar.open('Order Successfully created ✔.', '', {
+        this.snackBar.open('Order Successfully created.', '', {
           duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
           politeness: 'assertive'
         });
+        
 
 
       }
