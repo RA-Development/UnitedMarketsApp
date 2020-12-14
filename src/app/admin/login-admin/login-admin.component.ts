@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from './authentication.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
   styleUrls: ['./login-admin.component.css']
 })
@@ -13,8 +13,10 @@ export class LoginAdminComponent implements OnInit {
   submitted = false;
   loading = false;
   errormessage = '';
+  returnUrl: string;
 
   constructor(private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService) { }
 
@@ -27,6 +29,9 @@ export class LoginAdminComponent implements OnInit {
 
     // Reset login status
     this.authenticationService.logout();
+
+    // Get return url from route parameters or default
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/admin/orders';
   }
 
   // Getters for easy access to form fields
@@ -47,7 +52,7 @@ export class LoginAdminComponent implements OnInit {
     this.authenticationService.login(this.username.value, this.password.value)
       .subscribe(
         success => {
-          this.router.navigate(['manage/orders']);
+          this.router.navigateByUrl(this.returnUrl);
         },
         error => {
           this.submitted = true;

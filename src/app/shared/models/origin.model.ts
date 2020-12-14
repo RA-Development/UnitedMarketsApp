@@ -1,4 +1,4 @@
-import {Product} from '../../components/products/shared/product.model';
+import {Product} from '../../modules/products/shared/product.model';
 
 export class Origin {
   id?: number;

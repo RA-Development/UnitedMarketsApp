@@ -1,0 +1,51 @@
+<div class="nav-container">
+  <mat-toolbar color="primary" class="mat-elevation-z6">
+    <button mat-icon-button *ngIf="isAuthenticated()" (click)="isExpanded=!isExpanded">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>{{titleAdministration}}</h1>
+    <button mat-icon-button *ngIf=isAuthenticated() class="btnLogout" (click)="navigateToLoginPage()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav *ngIf="isAuthenticated()" class="example-sidenav" mode="side" opened="true">
+      <mat-nav-list class="dashboard">
+        <a mat-list-item (click)="toggleActive($event)">
+          <mat-icon mat-list-icon >account_circle</mat-icon>
+          <p matLine *ngIf="isExpanded">{{username}}</p>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a mat-list-item (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>group</mat-icon>
+          <p matLine *ngIf="isExpanded">Users</p>
+        </a>
+        <a mat-list-item (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>store_mall_directory</mat-icon>
+          <p matLine *ngIf="isExpanded">Markets</p>
+        </a>
+        <a mat-list-item (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>local_parking</mat-icon>
+          <p matLine *ngIf="isExpanded">Products</p>
+        </a>
+        <a mat-list-item (click)="toggleActive($event)">
+          <mat-icon mat-list-icon>category</mat-icon>
+          <p matLine *ngIf="isExpanded">Categories</p>
+        </a>
+        <a mat-list-item routerLink='/admin/orders' (click)="toggleActive($event)" (click) ="navigateToSelection()">
+          <mat-icon mat-list-icon>shopping_cart</mat-icon>
+          <p matLine *ngIf="isExpanded">Orders</p>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="selection-content">
+      <app-login-admin *ngIf="!isAuthenticated()"></app-login-admin>
+      <router-outlet *ngIf="isAuthenticated()"></router-outlet>
+    </div>
+
+  </mat-sidenav-container>
+</div>

@@ -1,20 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {WelcomeComponent} from './components/welcome/welcome.component';
-import {MarketComponent} from './components/market/market.component';
-import {CartComponent} from './components/cart/cart.component';
-import {LoginAdminComponent} from './components/login-admin/login-admin.component';
-import {AuthGuard} from './components/login-admin/auth.guard';
-import {OrderListComponent} from './components/orders/order-list.component';
+import {WelcomeComponent} from './modules/welcome/welcome.component';
+import {MarketComponent} from './modules/market/market.component';
+import {CartComponent} from './modules/cart/cart.component';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'market/:id', component: MarketComponent},
-  {path: 'cart', component: CartComponent},
-  { path: 'manage/login', component: LoginAdminComponent },
-  { path: 'manage/orders', component: OrderListComponent, canActivate: [AuthGuard] },
-  { path: 'manage', redirectTo: 'manage/login' }
+  {path: 'cart', component: CartComponent}
 ];
 
 @NgModule({

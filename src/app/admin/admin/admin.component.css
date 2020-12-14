@@ -1,0 +1,47 @@
+/*container for everything*/
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/*container for sidenav only*/
+.sidenav-container {
+  flex: 1;
+}
+
+/*toolbar items*/
+.mat-toolbar {
+  height: 80px;
+  opacity: 0.9;
+}
+
+.btnLogout{
+  position: absolute;
+  right: 30px;
+}
+
+/*sidebar items*/
+.mat-drawer{
+  opacity: 0.9;
+  background: white;
+}
+
+.mat-list-item{
+  color: black;
+  opacity: 0.7;
+}
+
+/*main content from selection*/
+.selection-content {
+  /*display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;*/
+  opacity: 0.9;
+  margin: 5em;
+}

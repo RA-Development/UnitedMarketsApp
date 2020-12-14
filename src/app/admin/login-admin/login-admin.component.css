@@ -1,13 +1,13 @@
-.login-info{
+.login-info {
   font-size: small;
-  margin-top: 60px;
+  margin-top: -5px;
 }
 
 .span {
   margin: auto;
 }
 
-mat-toolbar{
+mat-toolbar {
   border-radius: 5px;
   margin-bottom: 25px;
 }
@@ -20,4 +20,13 @@ mat-card {
 
 mat-form-field {
   display: block;
+  margin-bottom: 10px;
+}
+
+mat-spinner {
+  margin: 1em auto;
+}
+
+mat-error {
+  margin-top: 10px;
 }

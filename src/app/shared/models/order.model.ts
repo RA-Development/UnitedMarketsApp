@@ -1,4 +1,5 @@
 import {OrderLine} from './orderLine.model';
+import {OrderStatus} from './orderStatus.model';
 
 export class Order {
   id?: number;
@@ -8,5 +9,5 @@ export class Order {
   billingAddress: string;
   shippingAddress: string;
   orderStatusId: number;
-
+  orderStatus?: OrderStatus;
 }
