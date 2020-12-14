@@ -1,0 +1,33 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="orders">
+
+  <!-- Id column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Order Number </th>
+    <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+  </ng-container>
+
+  <!-- Date column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Created </th>
+    <td mat-cell *matCellDef="let order"> {{order.dateCreated | date:'medium'}} </td>
+  </ng-container>
+
+  <!-- Price column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let order"> {{order.totalPrice}}  kr.</td>
+  </ng-container>
+
+  <!-- Status column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let order"> {{order.orderStatus.name}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="onRowClicked(row)" [ngClass]="{ 'selected' : row === currentEntity }"
+      routerLink="admin/order/{{row.valueOf().id}}">>
+  </tr>
+
+</table>

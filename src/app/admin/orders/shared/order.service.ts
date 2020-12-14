@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {AuthenticationService} from '../../login-admin/authentication.service';
 import {environment} from '../../../../environments/environment';
-import {Market} from '../../markets/shared/market.model';
+import {Order} from '../../../shared/models/order.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,14 +17,17 @@ const httpOptions = {
 })
 
 export class OrderService {
+
+  ordersApiUrl = environment.apiUrl + 'orders';
+
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
-  getItems(): Observable<Market[]> {
+  getItems(): Observable<Order[]> {
     // Add authorization header with jwt token
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authenticationService.getToken());
 
-    // Get from api TODO: Replace!
-    return this.http.get<Market[]>(environment.apiUrl + 'markets/admin', httpOptions);
+    // Get from api
+    return this.http.get<Order[]>(this.ordersApiUrl, httpOptions);
   }
 }

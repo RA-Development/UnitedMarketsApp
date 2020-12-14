@@ -18,12 +18,21 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
-import { LoginAdminComponent } from './components/login-admin/login-admin.component';
-import { OrderListComponent } from './components/orders/order-list.component';
-import {AuthGuard} from './components/login-admin/auth.guard';
-import { AuthenticationService } from './components/login-admin/authentication.service';
+import {AuthGuard} from './admin/login-admin/auth.guard';
+import {AuthenticationService} from './admin/login-admin/authentication.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {AdminModule} from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -34,26 +43,35 @@ import {MatInputModule} from '@angular/material/input';
     MarketTilesComponent,
     MarketComponent,
     ProductItemComponent,
-    CartComponent,
-    LoginAdminComponent,
-    OrderListComponent
+    CartComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule,
-
+    AdminModule,
     MatBadgeModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSortModule,
     MatTableModule,
     MatToolbarModule,
+
+    MatSelectModule, // select box
+    MatTooltipModule,
   ],
   providers: [
     AuthGuard,
