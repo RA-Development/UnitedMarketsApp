@@ -50,16 +50,16 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MarketComponent,
     ProductItemComponent,
     CartComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
+    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AdminModule,
     MatBadgeModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -86,6 +86,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AuthGuard,
     AuthenticationService
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
