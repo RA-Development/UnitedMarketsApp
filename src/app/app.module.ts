@@ -53,13 +53,13 @@ import {DialogModule} from './modules/dialog/dialog.module';
     CartComponent
   ],
   imports: [
+    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AdminModule,
     MatBadgeModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -87,6 +87,7 @@ import {DialogModule} from './modules/dialog/dialog.module';
     AuthGuard,
     AuthenticationService
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

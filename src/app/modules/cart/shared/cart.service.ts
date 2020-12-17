@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {CartItem} from '../../../shared/models/cartItem.model';
 import {Product} from '../../products/shared/product.model';
 import {OrderLine} from '../../../shared/models/orderLine.model';
-import {element} from 'protractor';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Order} from '../../../shared/models/order.model';
+import {Order} from '../../../admin/orders/shared/order.model';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({

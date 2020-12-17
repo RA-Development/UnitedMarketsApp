@@ -3,7 +3,7 @@ import {Product} from '../products/shared/product.model';
 import {CartService} from './shared/cart.service';
 import {OrderLine} from '../../shared/models/orderLine.model';
 import {of, Subscription} from 'rxjs';
-import {Order} from '../../shared/models/order.model';
+import {Order} from '../../admin/orders/shared/order.model';
 import {catchError, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -78,7 +78,7 @@ export class CartComponent implements OnInit, OnDestroy {
       products,
       billingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 7, Esbjerg 6700, Denmark',
       shippingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 80, Esbjerg 6700, Denmark',
-      orderStatusId: 1,
+      statusId: 1,
       totalPrice
     };
 
