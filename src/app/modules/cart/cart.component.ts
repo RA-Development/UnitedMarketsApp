@@ -5,10 +5,9 @@ import {OrderLine} from '../../shared/models/orderLine.model';
 import {of, Subscription} from 'rxjs';
 import {Order} from '../../shared/models/order.model';
 import {catchError, tap} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
-import {DialogComponent} from '../dialog/dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {DialogService} from '../dialog/dialog.service';
 
 @Component({
   selector: 'app-cart',
@@ -31,7 +30,7 @@ export class CartComponent implements OnInit, OnDestroy {
   private err: undefined;
 
   constructor(private cartService: CartService,
-              private dialog: MatDialog,
+              private dialogService: DialogService,
               private snackBar: MatSnackBar,
               private route: Router
   ) {
@@ -77,9 +76,9 @@ export class CartComponent implements OnInit, OnDestroy {
 
     const order: Order = {
       products,
-      billingAddress: 'Chris Hansen, Spansbjerg Kirkevej 7, Esbjerg 6700, Denmark',
-      shippingAddress: 'Chris Hansen, Spansbjerg Kirkevej 80, Esbjerg 6700, Denmark',
-      orderStatusId: 4,
+      billingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 7, Esbjerg 6700, Denmark',
+      shippingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 80, Esbjerg 6700, Denmark',
+      orderStatusId: 1,
       totalPrice
     };
 
@@ -110,14 +109,20 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent);
+    const options = {
+      title: 'CHECKOUT CONFIRMATION',
+      message: 'Are you sure you want to check out?',
+      cancelText: 'CANCEL',
+      confirmText: 'CONFIRM'
+    };
+    this.dialogService.open(options);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'true' && this.dataSource.length > 0) {
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed === true && this.dataSource.length > 0) {
         this.placeOrder();
 
         // this.cartService.clearCart();
-        this.snackBar.open('Order Successfully created.', '', {
+        this.snackBar.open('Order successfully created.', '', {
           duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
@@ -125,6 +130,5 @@ export class CartComponent implements OnInit, OnDestroy {
         });
       }
     });
-
   }
 }

@@ -36,6 +36,7 @@ import {AdminModule} from './admin/admin.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogComponent} from './modules/dialog/dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DialogModule} from './modules/dialog/dialog.module';
 
 @NgModule({
   entryComponents: [
@@ -49,8 +50,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MarketTilesComponent,
     MarketComponent,
     ProductItemComponent,
-    CartComponent,
-    DialogComponent
+    CartComponent
   ],
   imports: [
     AppRoutingModule,
@@ -81,6 +81,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
     MatSelectModule, // select box
     MatTooltipModule,
+    DialogModule
   ],
   providers: [
     AuthGuard,
