@@ -32,6 +32,8 @@ export class OrderService {
   }
 
   delete(id: number): Observable<Order> {
-    return this.http.delete<Order>(this.ordersApiUrl + '/' + id);
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', 'Bearer ' + this.authenticationService.getToken());
+    return this.http.delete<Order>(this.ordersApiUrl + '/' + id, httpOptions);
   }
 }

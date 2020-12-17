@@ -5,7 +5,6 @@ import {OrderLine} from '../../shared/models/orderLine.model';
 import {of, Subscription} from 'rxjs';
 import {Order} from '../../shared/models/order.model';
 import {catchError, tap} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {DialogService} from '../dialog/dialog.service';
@@ -79,7 +78,7 @@ export class CartComponent implements OnInit, OnDestroy {
       products,
       billingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 7, Esbjerg 6700, Denmark',
       shippingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 80, Esbjerg 6700, Denmark',
-      orderStatusId: 5,
+      orderStatusId: 1,
       totalPrice
     };
 
