@@ -1,0 +1,8 @@
+<div class="market-container" *ngIf="markets$ | async as markets">
+  <div class="market" *ngFor="let market of markets">
+    <img src="assets/markets/{{market.id}}.png" alt="" class="market-img" (click)="initProducts(market.id)"
+         routerLink="market/{{market.id}}">
+  </div>
+</div>
+
+

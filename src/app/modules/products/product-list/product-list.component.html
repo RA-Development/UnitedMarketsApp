@@ -1,0 +1,5 @@
+<div class="card-container" *ngIf="filteredList$ | async as fList">
+  <mat-card class="productCard" *ngFor="let product of fList.list">
+    <app-product-item [productItem]="product"></app-product-item>
+  </mat-card>
+</div>

@@ -1,0 +1,32 @@
+.login-info {
+  font-size: small;
+  margin-top: -5px;
+}
+
+.span {
+  margin: auto;
+}
+
+mat-toolbar {
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 5em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+mat-spinner {
+  margin: 1em auto;
+}
+
+mat-error {
+  margin-top: 10px;
+}

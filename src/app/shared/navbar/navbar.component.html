@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="mat-elevation-z6 appToolbar">
+  <button mat-raised-button routerLink="/">{{titleWebStore}}</button>
+  <app-market-tiles ></app-market-tiles>
+  <div class="btnCartContainer">
+    <button routerLink="/cart"
+            mat-raised-button
+            color="accent"
+            matBadgePosition="after"
+            matBadgeColor="warn">
+      Cart
+    </button>
+  </div>
+</mat-toolbar>

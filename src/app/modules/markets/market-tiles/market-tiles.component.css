@@ -1,0 +1,19 @@
+.market-container {
+  margin-left: 30px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.market{
+  width: auto;
+  display: block;
+  text-align: center;
+
+}
+
+.market-img {
+  max-width: 100px;
+  margin: 10px;
+
+}

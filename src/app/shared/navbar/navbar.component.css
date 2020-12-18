@@ -1,0 +1,9 @@
+.appToolbar {
+  opacity: 0.9;
+  height: 80px;
+}
+
+.btnCartContainer {
+  position: absolute;
+  right: 30px;
+}
