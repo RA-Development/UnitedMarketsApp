@@ -8,6 +8,6 @@ export class Order {
   dateCreated?: Date;
   billingAddress: string;
   shippingAddress: string;
-  statusId: number;
+  statusId?: number;
   status?: Status;
 }

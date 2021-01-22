@@ -5,7 +5,7 @@ import {Market} from '../../markets/shared/market.model';
 export class Product {
   id: number;
   name: string;
-  price: number;
+  price?: number;
   pricePerUnit: number;
   amount: number;
   marketId: number;

@@ -1,43 +1,33 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../../products/shared/product.model';
 import {OrderLine} from '../../../shared/models/orderLine.model';
-import {Observable, Subject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Order} from '../../../admin/orders/shared/order.model';
-import {environment} from '../../../../environments/environment';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private apiUrl = environment.apiUrl + 'orders';
-
   orderLines: OrderLine[] = [];
-  private subTotalPrice = new Subject<number>();
-  subTotalPrice$ = this.subTotalPrice.asObservable();
-  private qty = new Subject<number>();
-  qty$ = this.qty.asObservable();
 
-  constructor(private http: HttpClient) {
-    const loadedOrderLines = this.loadOrderLines();
-    this.orderLines = loadedOrderLines ? loadedOrderLines : [];
+  private totalPriceSubject = new BehaviorSubject<number>(this.getTotalPrice(this.loadOrderLines()));
+  totalPrice$ = this.totalPriceSubject.asObservable();
 
-    if (this.orderLines) {
-      this.setCartCount(this.getTotalQuantity(this.orderLines));
-      this.setTotalPrice(this.getTotalPrice(this.orderLines));
+  private qtySubject = new BehaviorSubject<number>(this.getTotalQuantity(this.loadOrderLines()));
+  qty$ = this.qtySubject.asObservable();
 
-    }
+  constructor() {
+    this.orderLines = this.loadOrderLines();
   }
 
   setTotalPrice(totalPrice: number): void {
-    localStorage.setItem('subTotal', JSON.stringify(totalPrice));
-    this.subTotalPrice.next(JSON.parse(localStorage.getItem('subTotal')));
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+    this.totalPriceSubject.next(JSON.parse(localStorage.getItem('totalPrice')));
   }
 
   setCartCount(qty: number): void {
     localStorage.setItem('qty', JSON.stringify(qty));
-    this.qty.next(JSON.parse(localStorage.getItem('qty')));
+    this.qtySubject.next(JSON.parse(localStorage.getItem('qty')));
   }
 
   loadOrderLines(): OrderLine[] {
@@ -45,9 +35,8 @@ export class CartService {
   }
 
   addToCart(product: Product): void {
-    this.loadOrderLines();
     const currentOrderLine = this.orderLines.find(ol => ol.product.id === product.id);
-    if (this.orderLines && currentOrderLine) {
+    if (currentOrderLine) {
       currentOrderLine.quantity++;
     } else {
       const freshOrderLine = new OrderLine();
@@ -55,15 +44,12 @@ export class CartService {
       freshOrderLine.product = product;
       freshOrderLine.quantity = 1;
       this.orderLines.push(freshOrderLine);
-
     }
     this.saveChanges();
   }
 
   removeFromCart(product: Product): void {
     const currentOrderLine = this.orderLines.find(ol => ol.product.id === product.id);
-    this.loadOrderLines();
-
     if (currentOrderLine.quantity > 1) {
       currentOrderLine.quantity--;
     } else {
@@ -84,13 +70,6 @@ export class CartService {
     return q;
   }
 
-  saveChanges(): void {
-    localStorage.setItem('orderLines', JSON.stringify(this.orderLines));
-    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
-    this.setTotalPrice(this.getTotalPrice(this.loadOrderLines()));
-  }
-
-
   getTotalPrice(dataSource: OrderLine[]): number {
     let totalPrice = 0;
     for (const orderLine of dataSource) {
@@ -99,9 +78,10 @@ export class CartService {
     return totalPrice;
   }
 
-
-  createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, order);
+  saveChanges(): void {
+    localStorage.setItem('orderLines', JSON.stringify(this.orderLines));
+    this.setCartCount(this.getTotalQuantity(this.loadOrderLines()));
+    this.setTotalPrice(this.getTotalPrice(this.loadOrderLines()));
   }
 
   clearCart(): void {

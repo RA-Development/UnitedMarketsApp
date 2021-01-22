@@ -8,9 +8,10 @@ import {Order} from '../shared/order.model';
 import {catchError, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {DialogService} from '../../../modules/dialog/dialog.service';
+import {DialogService} from '../../../shared/modules/dialog/dialog.service';
 import {Status} from '../../../shared/models/status.model';
 import {StatusService} from '../../../shared/services/status.service';
+import {SnackBarService} from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-order-list',
@@ -22,7 +23,6 @@ export class OrderListComponent implements OnInit {
   err: any;
   displayedColumns: string[] = ['id', 'date', 'price', 'status', 'actions'];
   statuses: Status[];
-  dataSource = new OrderDataSource(this.orderService);
   currentEntity: any;
 
   constructor(private orderService: OrderService,
@@ -30,28 +30,19 @@ export class OrderListComponent implements OnInit {
               private router: Router,
               private authService: AuthenticationService,
               private dialogService: DialogService,
-              private snackBar: MatSnackBar) {
+              private snackBarService: SnackBarService) {
   }
 
   ngOnInit(): void {
-    // TODO: Replace!
-    this.orderService.getOrders()
-      .subscribe(
-        response => {
-          this.orders = response;
-          console.log(this.orders);
-        }
-      );
+    this.orderService.getOrders().subscribe(response => {
+        this.orders = response;
+      }
+    );
 
-    this.statusService.getStatuses()
-      .subscribe(
-        response => {
-          this.statuses = response;
-          console.log(this.statuses);
-
-        }
-      );
-
+    this.statusService.getStatuses().subscribe(response => {
+        this.statuses = response;
+      }
+    );
   }
 
   onRowClicked(row): void {
@@ -68,15 +59,9 @@ export class OrderListComponent implements OnInit {
     };
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(confirmed => {
+    this.dialogService.action().subscribe(confirmed => {
       if (confirmed === true && order != null) {
         this.delete(order);
-        this.snackBar.open('Order successfully deleted.', '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          politeness: 'assertive'
-        });
       }
     });
   }
@@ -97,28 +82,11 @@ export class OrderListComponent implements OnInit {
   updateOrder(order: Order): void {
     this.orderService.updateOrder(order).subscribe(
       response => {
-        console.log(response);
-        this.snackBar.open('Status of order #' + response.id + ' was successfully updated.', '', {
-          duration: 6000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          politeness: 'polite',
-          panelClass: ['mat-toolbar', 'mat-accent']
-        });
+        this.snackBarService
+          .showNotification(`Status of order #${response.id} successfully updated.`);
       }
     );
   }
 }
 
-export class OrderDataSource extends DataSource<any> {
-  constructor(private orderService: OrderService) {
-    super();
-  }
 
-  connect(): Observable<Order[]> {
-    return this.orderService.getOrders();
-  }
-
-  disconnect(): void {
-  }
-}

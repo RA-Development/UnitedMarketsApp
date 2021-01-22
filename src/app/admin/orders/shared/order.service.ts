@@ -44,4 +44,8 @@ export class OrderService {
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authenticationService.getToken());
     return this.http.put<Order>(this.ordersApiUrl + '/' + order.id, order, httpOptions);
   }
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.ordersApiUrl, order);
+  }
 }
