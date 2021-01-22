@@ -34,9 +34,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AdminModule} from './admin/admin.module';
 import {MatDialogModule} from '@angular/material/dialog';
-import {DialogComponent} from './modules/dialog/dialog.component';
+import {DialogComponent} from './shared/modules/dialog/dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {DialogModule} from './modules/dialog/dialog.module';
+import {DialogModule} from './shared/modules/dialog/dialog.module';
 
 @NgModule({
   entryComponents: [
