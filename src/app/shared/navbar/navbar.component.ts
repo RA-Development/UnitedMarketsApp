@@ -14,5 +14,6 @@ export class NavbarComponent implements OnInit {
   constructor(private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 }

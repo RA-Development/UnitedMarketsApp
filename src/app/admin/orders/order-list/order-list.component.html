@@ -9,13 +9,13 @@
   <!-- Date column -->
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef>Created</th>
-    <td mat-cell *matCellDef="let order"> {{order.dateCreated | date:'medium'}} </td>
+    <td mat-cell *matCellDef="let order"> {{order['dateCreated'] | date:'medium'}} </td>
   </ng-container>
 
   <!-- Price column -->
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Total</th>
-    <td mat-cell *matCellDef="let order"> {{order.totalPrice}} kr.</td>
+    <td mat-cell *matCellDef="let order"> {{order['totalPrice']}} kr.</td>
   </ng-container>
 
   <!-- Status column -->

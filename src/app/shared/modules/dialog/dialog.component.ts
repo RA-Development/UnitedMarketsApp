@@ -11,6 +11,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
     .header, .dialog-message {
       text-transform: lowercase;
     }
+
     .header::first-letter, .dialog-message::first-letter {
       text-transform: uppercase;
     }`]
@@ -24,7 +25,8 @@ export class DialogComponent implements OnInit {
       message: string,
       title: string
     },
-    private mdDialogRef: MatDialogRef<DialogComponent>){}
+    private mdDialogRef: MatDialogRef<DialogComponent>) {
+  }
 
   ngOnInit(): void {
   }
@@ -32,14 +34,17 @@ export class DialogComponent implements OnInit {
   public cancel(): void {
     this.close(false);
   }
-  public close(value): void  {
+
+  public close(value): void {
     this.mdDialogRef.close(value);
   }
-  public confirm(): void  {
+
+  public confirm(): void {
     this.close(true);
   }
+
   @HostListener('keydown.esc')
-  public onEsc(): void  {
+  public onEsc(): void {
     this.close(false);
   }
 }

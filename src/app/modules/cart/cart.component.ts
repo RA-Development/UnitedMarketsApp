@@ -7,7 +7,9 @@ import {Order} from '../../admin/orders/shared/order.model';
 import {catchError, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {DialogService} from '../dialog/dialog.service';
+import {DialogService} from '../../shared/modules/dialog/dialog.service';
+import {OrderService} from '../../admin/orders/shared/order.service';
+import {SnackBarService} from '../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-cart',
@@ -24,33 +26,28 @@ export class CartComponent implements OnInit, OnDestroy {
     'total'];
   dataSource: OrderLine[] = [];
   totalQuantity: number;
-  subTotalPrice: number;
-  private countSub: Subscription;
-  private subTotalSub: Subscription;
-  private err: undefined;
+  totalPrice: number;
+  private qtySub: Subscription;
+  private totalPriceSub: Subscription;
 
   constructor(private cartService: CartService,
+              private orderService: OrderService,
               private dialogService: DialogService,
-              private snackBar: MatSnackBar,
-              private route: Router
+              private route: Router,
+              private snackBarService: SnackBarService
   ) {
-    this.dataSource = this.cartService.loadOrderLines();
-
-    if (this.dataSource) {
-      this.totalQuantity = this.cartService.getTotalQuantity(this.dataSource);
-      this.subTotalPrice = this.cartService.getTotalPrice(this.dataSource);
-    }
-
-    this.subTotalSub = this.cartService.subTotalPrice$.subscribe(subTotal => {
-      this.subTotalPrice = subTotal;
-    });
-
-    this.countSub = this.cartService.qty$.subscribe(qty => {
-      this.totalQuantity = qty;
-    });
   }
 
   ngOnInit(): void {
+    this.dataSource = this.cartService.loadOrderLines();
+
+    this.totalPriceSub = this.cartService.totalPrice$.subscribe(totalPrice => {
+      this.totalPrice = totalPrice;
+    });
+
+    this.qtySub = this.cartService.qty$.subscribe(qty => {
+      this.totalQuantity = qty;
+    });
   }
 
 
@@ -65,9 +62,25 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
 
+  openDialog(): void {
+    const options = {
+      title: 'CHECKOUT CONFIRMATION',
+      message: 'Are you sure you want to check out?',
+      cancelText: 'CANCEL',
+      confirmText: 'CONFIRM'
+    };
+    this.dialogService.open(options);
+
+    this.dialogService.action().subscribe(response => {
+      if (response === true && this.dataSource.length > 0) {
+        this.placeOrder();
+        this.cartService.clearCart();
+      }
+    });
+  }
+
   placeOrder(): void {
     const products = this.cartService.loadOrderLines();
-    const totalPrice = this.cartService.getTotalPrice(this.dataSource);
 
     for (const p of products) {
       p.subTotalPrice = p.product.price * p.quantity;
@@ -78,57 +91,25 @@ export class CartComponent implements OnInit, OnDestroy {
       products,
       billingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 7, Esbjerg 6700, Denmark',
       shippingAddress: 'Chris Hansen, Spangsbjerg Kirkevej 80, Esbjerg 6700, Denmark',
-      statusId: 1,
-      totalPrice
+      totalPrice: this.totalPrice
     };
 
-    this.cartService.createOrder(order)
-      .pipe(
-        tap(() => this.err = undefined),
-        catchError(err => {
-          this.err = err.error ?? err.message;
-          console.log(this.err);
-          return of([]);
-        })
-      )
-      .subscribe(createdOrder => {
-        console.log(JSON.stringify(createdOrder));
-        this.cartService.clearCart();
-        this.route.navigateByUrl('/');
-
-      });
+    this.orderService.createOrder(order).subscribe(createdOrder => {
+      console.log(JSON.stringify(createdOrder));
+      this.snackBarService
+        .showNotification(`Order #${createdOrder.id} successfully created`);
+      this.route.navigateByUrl('/');
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.subTotalSub) {
-      this.subTotalSub.unsubscribe();
+    if (this.totalPriceSub) {
+      this.totalPriceSub.unsubscribe();
     }
-    if (this.countSub) {
-      this.countSub.unsubscribe();
+    if (this.qtySub) {
+      this.qtySub.unsubscribe();
     }
   }
 
-  openDialog(): void {
-    const options = {
-      title: 'CHECKOUT CONFIRMATION',
-      message: 'Are you sure you want to check out?',
-      cancelText: 'CANCEL',
-      confirmText: 'CONFIRM'
-    };
-    this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(confirmed => {
-      if (confirmed === true && this.dataSource.length > 0) {
-        this.placeOrder();
-
-        // this.cartService.clearCart();
-        this.snackBar.open('Order successfully created.', '', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          politeness: 'assertive'
-        });
-      }
-    });
-  }
 }

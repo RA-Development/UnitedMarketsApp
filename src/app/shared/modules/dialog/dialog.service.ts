@@ -6,7 +6,10 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Injectable()
 export class DialogService {
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog) {
+  }
+
   dialogRef: MatDialogRef<DialogComponent>;
 
   public open(options): void {
@@ -19,10 +22,14 @@ export class DialogService {
       }
     });
   }
-  public confirmed(): Observable<any> {
-    return this.dialogRef.afterClosed().pipe(take(1), map(result => {
-        return result;
-      }
-    ));
+
+  public action(): Observable<any> {
+    return this.dialogRef.afterClosed()
+      .pipe(
+        take(1),
+        map(result => {
+            return result;
+          }
+        ));
   }
 }
